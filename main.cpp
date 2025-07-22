@@ -3,10 +3,18 @@
 #include "headers/EventListener.h"
 #include "headers/globals.h"
 #include "headers/ChessBoard.h"
+#include "headers/MovesCalculator.h"
+#include "headers/MovesHandler.h"
 #include <iostream>
 
-void mainfunction(ChessBoard& chessBoard, Draw& draw){
+MovesHandler movesHandler;
+MovesCalculator movesCalculator;
+
+int i = 0;
+
+void mainfunction(ChessBoard& chessBoard, Draw& draw, EventListener& eventListener) {
     draw.clearScreen(255, 255, 255, 255);
+    movesHandler.handleMouseClick(chessBoard, eventListener, draw);
     chessBoard.draw(draw);
     draw.present();
 }
@@ -53,6 +61,8 @@ int main(int argc, char *argv[]) {
     Uint32 lastTick = SDL_GetTicks();
     float deltaTime;
 
+    std::vector<ChessBoard> moves = movesCalculator.allMoves(chessBoard);
+
     //main loop
     while (running) {
         Uint32 frameStart = SDL_GetTicks();
@@ -70,7 +80,7 @@ int main(int argc, char *argv[]) {
         }
         eventListener.listenEvents();
 
-        mainfunction(chessBoard, draw);
+        mainfunction(chessBoard, draw, eventListener);
 
         Uint32 frameTime = SDL_GetTicks() - frameStart;
         if (frameDelay > frameTime) {

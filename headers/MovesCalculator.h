@@ -2,20 +2,13 @@
 #include "ChessBoard.h"
 
 class MovesCalculator {
-    public:
-    ChessBoard blackPawnMoves(ChessBoard chessBoard);
-    ChessBoard blackRookMoves(ChessBoard chessBoard);
-    ChessBoard blackKnightMoves(ChessBoard chessBoard);
-    ChessBoard blackBishopMoves(ChessBoard chessBoard);
-    ChessBoard blackQueenMoves(ChessBoard chessBoard);
-    ChessBoard blackKingMoves(ChessBoard chessBoard);
-
-    ChessBoard whitePawnMoves(ChessBoard chessBoard);
-    ChessBoard whiteRockMoves(ChessBoard chessBoard);
-    ChessBoard whiteKnightMoves(ChessBoard chessBoard);
-    ChessBoard whiteBishopMoves(ChessBoard chessBoard);
-    ChessBoard whiteQueenMoves(ChessBoard chessBoard);
-    ChessBoard whiteKingMoves(ChessBoard chessBoard);
-
-    ChessBoard allMoves(ChessBoard chessBoard);
+public:
+    void removeBlackPiece(ChessBoard& chessBoard, int square);
+    std::vector<ChessBoard> whitePawnMoves(const ChessBoard& chessBoard);
+    std::vector<ChessBoard> whiteRookMoves(const ChessBoard& chessBoard);
+    std::vector<ChessBoard> whiteKnightMoves(const ChessBoard& chessBoard);
+    std::vector<ChessBoard> whiteBishopMoves(const ChessBoard& chessBoard);
+    std::vector<ChessBoard> whiteQueenMoves(const ChessBoard& chessBoard);
+    std::vector<ChessBoard> whiteKingMoves(const ChessBoard& chessBoard);
+    std::vector<ChessBoard> allMoves(const ChessBoard& chessBoard);
 };

@@ -3,27 +3,44 @@
 #include "objects.h"
 #include "stats.h"
 #include <unordered_map>
+#include "globals.h"
 #include "Draw.h"
 
 class ChessBoard {
     public:
-    size_t index;
-    std::vector<Entity> whitePawns;
-    std::vector<Entity> whiteRooks;
-    std::vector<Entity> whiteKnights;
-    std::vector<Entity> whiteBishops;
-    std::vector<Entity> whiteQueens;
-    std::vector<Entity> whiteKing;
+    uint64_t whitePawns;
+    uint64_t whiteKnights;
+    uint64_t whiteBishops;
+    uint64_t whiteRooks;
+    uint64_t whiteQueens;
+    uint64_t whiteKing;
 
-    std::vector<Entity> blackPawns;
-    std::vector<Entity> blackRooks;
-    std::vector<Entity> blackKnights;
-    std::vector<Entity> blackBishops;
-    std::vector<Entity> blackQueens;
-    std::vector<Entity> blackKing;
+    uint64_t blackPawns;
+    uint64_t blackKnights;
+    uint64_t blackBishops;
+    uint64_t blackRooks;
+    uint64_t blackQueens;
+    uint64_t blackKing;
 
-    std::unordered_map<size_t, Position> positions;
+    uint64_t whitePieces;
+    uint64_t blackPieces;
+    uint64_t allPieces;
+
+    int movesWithoutCaptureOrPawnMove;
+    int enPassantSquare;
+    bool whiteKingMoved;
+    bool blackKingMoved;
+    bool whiteRooksMoved[2];
+    bool blackRooksMoved[2];
+
+    unsigned int movesCount;
 
     ChessBoard();
+    ChessBoard(const ChessBoard& other);
+    bool operator==(const ChessBoard& other) const;
+    std::vector<std::string> operator-(const ChessBoard& other) const;
+    
+    //invert chessBoard so white pieces are black and black pieces are white
+    void invertPieces();
     void draw(Draw& draw);
 };
